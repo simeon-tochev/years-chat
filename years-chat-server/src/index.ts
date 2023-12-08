@@ -33,7 +33,7 @@ app.get('/messages', (_, res) => {
 io.on('connection', (socket) => {
   socket.on('message', (message) => {
     const id = chatService.sendMessage(message)
-    if (!message.edited) {
+    if (!message.edited && !message.deleted) {
       socket.emit('assignId', id)
     }
     socket.broadcast.emit('message', {

@@ -65,7 +65,7 @@ export function useMessages (username: string, setMessageBoxBalue: React.Dispatc
     if (existingMessage >= 0) {
       const newMessages = messages
       newMessages[messages.findIndex(m => m.id === message.id)] = message
-      setMessages(newMessages)
+      setMessages([...newMessages])
     } else {
       setMessages([
         ...messages,
@@ -97,6 +97,7 @@ export function useMessages (username: string, setMessageBoxBalue: React.Dispatc
         deleted: true
       }
       newMessages[messages.findIndex(m => m.id === id)] = deletedMessage
+      setMessages([...newMessages])
       socket.emit('message', deletedMessage)
     }
   }, [messages])
